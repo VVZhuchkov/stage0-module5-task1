@@ -97,14 +97,14 @@ public class ArrayTasks {
      * arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-        int counter=0;
+        int counter = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] > 0) {
                 counter++;
             }
         }
-        int[] newArray= new int[counter];
-        int j=0;
+        int[] newArray = new int[counter];
+        int j = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] > 0) {
                 newArray[j] = arr[i];
@@ -125,25 +125,30 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
 
-    public static void main(String[] args) {
-        ArrayTasks arrayTasks = new ArrayTasks();
-        int[][] array = new int[][]{
-                {3, 1, 2},
-                {5, -7, 8, 5}
-        };
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[j].length - 1; j++) {
-                System.out.println(arrayTasks.sortRaggedArray(array));
-            }
-        }
-    }
-
     public int[][] sortRaggedArray(int[][] arr) {
-        int temp = 0;
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[j].length; j++) {
-
+        for (int j = 0; j < arr.length; j++) {
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i].length > arr[i + 1].length) {
+                    int[] tempArray;
+                    tempArray = arr[i + 1];
+                    arr[i + 1] = arr[i];
+                    arr[i] = tempArray;
+                }
             }
         }
+
+        int temp;
+        for (int k = 0; k < arr.length; k++) {
+            for (int i = 0; i < arr.length; i++) {
+                for (int j = 0; j < arr[i].length - 1; j++) {
+                    if (arr[i][j] > arr[i][j + 1]) {
+                        temp = arr[i][j + 1];
+                        arr[i][j + 1] = arr[i][j];
+                        arr[i][j] = temp;
+                    }
+                }
+            }
+        }
+        return arr;
     }
 }
